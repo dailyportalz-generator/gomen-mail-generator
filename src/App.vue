@@ -1,36 +1,53 @@
 <template>
     <div id="app">
-        <div class="section">
-            <Atena v-if="step === 0"
-                   key="start"
-                   @setAtena="setAtena"/>
-            <OptionList v-if="step === 1"
-                        v-model="results[0]"
-                        :message="getOptionListConfigByKey(0).message"
-                        :options="getOptionListConfigByKey(0).options"
-                        @next="next"/>
-            <OptionList v-if="step === 2"
-                        v-model="results[1]"
-                        :message="getOptionListConfigByKey(1).message"
-                        :options="getOptionListConfigByKey(1).options"
-                        @next="next"/>
-            <OptionList v-if="step === 3"
-                        v-model="results[2]"
-                        :message="getOptionListConfigByKey(2).message"
-                        :options="getOptionListConfigByKey(2).options"
-                        @next="next"/>
-            <OptionList v-if="step === 4"
-                        v-model="results[3]"
-                        :message="getOptionListConfigByKey(3).message"
-                        :options="getOptionListConfigByKey(3).options"
-                        @next="next"/>
-            <OptionList v-if="step === 5"
-                        v-model="results[4]"
-                        :message="getOptionListConfigByKey(4).message"
-                        :options="getOptionListConfigByKey(4).options"
-                        @next="finish"/>
+        <div class="section" v-if="step < 99">
+            <Atena
+                    v-if="step === 0"
+                    @setAtena="setAtena"
+                    key="atena"
+            />
+            <OptionList
+                    v-if="step === 1"
+                    v-model="results[0]"
+                    :message="getOptionListConfigByKey(0).message"
+                    :options="getOptionListConfigByKey(0).options"
+                    @next="next"
+                    key="q1"
+            />
+            <OptionList
+                    v-if="step === 2"
+                    v-model="results[1]"
+                    :message="getOptionListConfigByKey(1).message"
+                    :options="getOptionListConfigByKey(1).options"
+                    @next="next"
+                    key="q2"
+            />
+            <OptionList
+                    v-if="step === 3"
+                    v-model="results[2]"
+                    :message="getOptionListConfigByKey(2).message"
+                    :options="getOptionListConfigByKey(2).options"
+                    @next="next"
+                    key="q3"
+            />
+            <OptionList
+                    v-if="step === 4"
+                    v-model="results[3]"
+                    :message="getOptionListConfigByKey(3).message"
+                    :options="getOptionListConfigByKey(3).options"
+                    @next="next"
+                    key="q4"
+            />
+            <OptionList
+                    v-if="step === 5"
+                    v-model="results[4]"
+                    :message="getOptionListConfigByKey(4).message"
+                    :options="getOptionListConfigByKey(4).options"
+                    @next="finish"
+                    key="q5"
+            />
         </div>
-        <Waku :step="step" :atena="atena" :results="results" :config="getOtpionListConfig"/>
+        <Waku :step="step" :atena="atena" :results="results" :config="getOtpionListConfig" key="waku"/>
     </div>
 </template>
 
@@ -77,9 +94,9 @@
                     {
                         message: 'まずはお詫び本文',
                         options: [
-                            'ちょっと難しい言葉を使って\n',
-                            '未来志向で謝る\n',
-                            'ふつうに、でも感情を込めて\n' +
+                            'ちょっと難しい言葉を使って',
+                            '未来志向で謝る',
+                            'ふつうに、でも感情を込めて',
                             '時代劇風に',
                             '一歩引いて',
                             'カジュアルに'
@@ -174,7 +191,7 @@
                 if (!params[val]) {
                     return false
                 }
-                if (val !== 'atena' && parseInt(params[val]) < 1) {
+                if (val !== 'atena' && Number(parseFloat(params[val])) === params[val]) {
                     return false
                 }
                 return true
@@ -199,6 +216,8 @@
     #app {
         width: 526px;
         margin: 0 auto;
+        font-family: メイリオ, Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ＭＳ Ｐゴシック", sans-serif !important;
+        line-height: 1.8;
     }
 
     .section {

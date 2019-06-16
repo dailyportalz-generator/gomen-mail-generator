@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit" class="select-question">
         <p><strong>{{ message }}</strong></p>
         <template v-for="(option, i) in options">
-            <p>
+            <p :key="option">
                 <label>
                     <input type="radio" :value="i" v-model="selectedValue">
                     {{ option }}
