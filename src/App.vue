@@ -1,51 +1,49 @@
 <template>
     <div id="app">
         <div class="section" v-if="step < 99">
-            <Atena
-                    v-if="step === 0"
+            <Atena  v-if="step === 0"
                     @setAtena="setAtena"
-                    key="atena"
-            />
+                    key="atena" />
             <OptionList
                     v-if="step === 1"
                     v-model="results[0]"
+                    :step="step"
                     :message="getOptionListConfigByKey(0).message"
                     :options="getOptionListConfigByKey(0).options"
                     @next="next"
-                    key="q1"
-            />
+                    key="q1" />
             <OptionList
                     v-if="step === 2"
                     v-model="results[1]"
+                    :step="step"
                     :message="getOptionListConfigByKey(1).message"
                     :options="getOptionListConfigByKey(1).options"
                     @next="next"
-                    key="q2"
-            />
+                    key="q2" />
             <OptionList
                     v-if="step === 3"
                     v-model="results[2]"
+                    :step="step"
                     :message="getOptionListConfigByKey(2).message"
                     :options="getOptionListConfigByKey(2).options"
                     @next="next"
-                    key="q3"
-            />
+                    key="q3" />
             <OptionList
                     v-if="step === 4"
                     v-model="results[3]"
+                    :step="step"
                     :message="getOptionListConfigByKey(3).message"
                     :options="getOptionListConfigByKey(3).options"
                     @next="next"
-                    key="q4"
-            />
+                    key="q4" />
             <OptionList
                     v-if="step === 5"
                     v-model="results[4]"
+                    :step="step"
                     :message="getOptionListConfigByKey(4).message"
                     :options="getOptionListConfigByKey(4).options"
                     @next="finish"
-                    key="q5"
-            />
+                    key="q5" />
         </div>
         <Waku :step="step" :atena="atena" :results="results" :config="getOtpionListConfig" key="waku"/>
     </div>

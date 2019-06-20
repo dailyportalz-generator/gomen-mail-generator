@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="handleSubmit" class="select-question">
-        <p><strong>{{ message }}</strong></p>
+        <p><strong>step {{ step }}</strong> {{ message }}</p>
         <template v-for="(option, i) in options">
             <p :key="option">
                 <label>
@@ -16,6 +16,7 @@
 <script>
     export default {
         props: {
+            step: Number,
             message: String,
             options: Array,
             value: Number
